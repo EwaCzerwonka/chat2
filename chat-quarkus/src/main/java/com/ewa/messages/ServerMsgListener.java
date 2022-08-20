@@ -19,7 +19,6 @@ import java.util.concurrent.Executors;
 @Log
 @ApplicationScoped
 public class ServerMsgListener implements Runnable {
-    //private static final String JMS_TOPIC = "chat";
     @Inject
     ConnectionFactory connectionFactory;
 

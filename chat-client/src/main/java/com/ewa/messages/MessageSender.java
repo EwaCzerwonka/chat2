@@ -1,5 +1,6 @@
 package com.ewa.messages;
 
+import com.ewa.commons.CommonNames;
 import lombok.extern.java.Log;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -13,7 +14,6 @@ import javax.jms.Topic;
 @ApplicationScoped
 
 public class MessageSender {
-    private static final String JMS_TOPIC = "chat";
 
     @Inject
     ConnectionFactory connectionFactory;
@@ -23,7 +23,7 @@ public class MessageSender {
 
         JMSContext context = connectionFactory.createContext(JMSContext.AUTO_ACKNOWLEDGE);
         JMSProducer messageProducer = context.createProducer();
-        Topic topic = context.createTopic(JMS_TOPIC);
+        Topic topic = context.createTopic(CommonNames.TOPIC);
 
         messageProducer.send(topic, message);
     }

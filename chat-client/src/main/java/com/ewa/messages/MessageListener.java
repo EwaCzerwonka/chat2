@@ -1,5 +1,6 @@
 package com.ewa.messages;
 
+import com.ewa.commons.CommonNames;
 import io.quarkus.runtime.ShutdownEvent;
 import io.quarkus.runtime.StartupEvent;
 import lombok.extern.java.Log;
@@ -14,7 +15,6 @@ import java.util.concurrent.Executors;
 @Log
 @ApplicationScoped
 public class MessageListener implements Runnable{
-    private static final String JMS_TOPIC = "chat";
 
     @Inject
     ConnectionFactory connectionFactory;
@@ -34,7 +34,7 @@ public class MessageListener implements Runnable{
     public void run() {
         String text;
         try(JMSContext context = connectionFactory.createContext(JMSContext.AUTO_ACKNOWLEDGE)){
-            Topic topic = context.createTopic(JMS_TOPIC);
+            Topic topic = context.createTopic(CommonNames.TOPIC);
             JMSConsumer consumer = context.createConsumer(topic);
             while(true){
                 Message message = consumer.receive();

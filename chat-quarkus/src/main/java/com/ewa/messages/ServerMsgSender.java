@@ -17,7 +17,6 @@ import javax.jms.Topic;
 @Log
 @ApplicationScoped
 public class ServerMsgSender {
-   // private static final String JMS_TOPIC = "chat";
 
     @Inject
     ConnectionFactory connectionFactory;

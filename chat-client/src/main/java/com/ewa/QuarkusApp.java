@@ -8,13 +8,8 @@ import java.util.UUID;
 public class QuarkusApp implements QuarkusApplication {
     @Override
     public int run(String... args) {
-        String name;
-        if(args.length > 0) {
-            name = args[0];
-        } else{
-            name = UUID.randomUUID().toString();
-        }
-        new ChatClient(name);
+        String name = (args != null && args.length > 0) ? args[0] : UUID.randomUUID().toString();
+        ChatClient.clientName = name;
         Quarkus.waitForExit();
         return 0;
     }

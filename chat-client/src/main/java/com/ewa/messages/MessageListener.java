@@ -2,6 +2,7 @@ package com.ewa.messages;
 
 import com.ewa.commons.CommonNames;
 import com.ewa.domain.TransferMessage;
+import com.ewa.logger.MessageLogger;
 import io.quarkus.runtime.ShutdownEvent;
 import io.quarkus.runtime.StartupEvent;
 import lombok.extern.java.Log;
@@ -19,6 +20,8 @@ public class MessageListener implements Runnable{
 
     @Inject
     ConnectionFactory connectionFactory;
+    @Inject
+    MessageLogger logger;
 
     private final ExecutorService scheduler = Executors.newSingleThreadExecutor();
 
@@ -41,7 +44,7 @@ public class MessageListener implements Runnable{
                 Message message = consumer.receive();
                 if(message == null) return;
                 transferMessage = message.getBody(TransferMessage.class);
-                log.info("klient przeczytano: " + transferMessage);
+                logger.log(transferMessage);
             }
         } catch (JMSException e){
             throw new RuntimeException(e);

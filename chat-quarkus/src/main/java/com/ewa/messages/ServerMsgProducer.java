@@ -7,6 +7,7 @@ import lombok.extern.java.Log;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.event.Observes;
+import javax.inject.Inject;
 import java.util.Scanner;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -16,6 +17,8 @@ import java.util.concurrent.Executors;
 @RequiredArgsConstructor
 public class ServerMsgProducer implements Runnable {
 
+    @Inject
+    ServerWorker worker;
     private final ExecutorService scheduler = Executors.newSingleThreadExecutor();
 
 
@@ -27,22 +30,8 @@ public class ServerMsgProducer implements Runnable {
         scheduler.shutdown();
     }
 
-    private final ServerMsgSender messageSender;
-
 
     @Override
     public void run() {
-        read();
     }
-
-
-    public void read() {
-
-        String text;
-        Scanner scanner = new Scanner(System.in);
-        while ((text =  scanner.nextLine()) != null) {
-            messageSender.sendMessage(text);
-        }
-    }
-
 }

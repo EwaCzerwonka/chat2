@@ -1,6 +1,7 @@
 package com.ewa.messages;
 
 import com.ewa.commons.CommonNames;
+import com.ewa.domain.TransferMessage;
 import lombok.extern.java.Log;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -21,7 +22,7 @@ public class ServerMsgSender {
     @Inject
     ConnectionFactory connectionFactory;
 
-    public void sendMessage(String message) {
+    public void sendMessage(TransferMessage message) {
         log.info(" -> MessageProducer.sendMessage message = %s".formatted(message));
 
         JMSContext context = connectionFactory.createContext(JMSContext.AUTO_ACKNOWLEDGE);

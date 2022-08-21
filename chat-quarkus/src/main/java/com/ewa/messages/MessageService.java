@@ -2,6 +2,7 @@ package com.ewa.messages;
 
 
 import com.ewa.domain.TransferMessage;
+import com.ewa.persistence.ChatRepository;
 import lombok.extern.java.Log;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -13,10 +14,12 @@ public class MessageService {
 
     @Inject
     ServerWorker worker;
+    @Inject
+    ChatRepository chatRepository;
 
     public void processTransferMessage(TransferMessage transferMessage){
         if(transferMessage.isPublish()) {
-            worker.sendMessage("Resending message " + transferMessage.getTextMsg());
+            chatRepository.createChatEntry(transferMessage);
         }
     }
 

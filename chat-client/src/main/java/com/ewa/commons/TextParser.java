@@ -2,9 +2,10 @@ package com.ewa.commons;
 
 import org.apache.commons.lang3.StringUtils;
 
-public class TextParser {
+import javax.inject.Singleton;
 
-    private TextParser(){}
+@Singleton
+public class TextParser {
 
     public static int parseLastNumber(String text, String separator){
         Integer number = 0;

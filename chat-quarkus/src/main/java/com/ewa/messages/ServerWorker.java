@@ -14,17 +14,7 @@ public class ServerWorker {
     @Inject
     ServerMsgSender messageSender;
 
-    public void sendMessage(String msg){
-        TransferMessage transferMessage = process(msg);
-        if (transferMessage != null){
-            messageSender.sendMessage(transferMessage);
-        }
+    public void sendMessage(TransferMessage transferMessage){
+        messageSender.sendMessage(transferMessage);
     }
-
-    private TransferMessage process(String msg) {
-        TransferMessage transferMessage = new TransferMessage("", msg, 0, false);
-
-        return transferMessage;
-    }
-
 }

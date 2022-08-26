@@ -23,12 +23,9 @@ public class ServerMsgSender {
     ConnectionFactory connectionFactory;
 
     public void sendMessage(TransferMessage message) {
-        log.info(" -> MessageProducer.sendMessage message = %s".formatted(message));
-
         JMSContext context = connectionFactory.createContext(JMSContext.AUTO_ACKNOWLEDGE);
         JMSProducer messageProducer = context.createProducer();
         Topic topic = context.createTopic(CommonNames.TOPIC);
-
         messageProducer.send(topic, message);
     }
 }

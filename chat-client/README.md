@@ -1,5 +1,9 @@
 # chat-client Project
 
+
+> **_NOTE:_** Uruchomić klienta można podając mu jako argument nazwę użytkownika. W przypadku braku argumentu, zostanie nadana losowa nazwa.
+
+
 This project uses Quarkus, the Supersonic Subatomic Java Framework.
 
 If you want to learn more about Quarkus, please visit its website: https://quarkus.io/ .

@@ -1,5 +1,11 @@
 # chat-quarkus Project
 
+> **_NOTE:_** W projekcie wykorzystywany jest  Apache ActiveMQ Artemis, należy w terminalu wpisać:
+docker run -it --rm -p 8161:8161 -p 61616:61616 -p 5672:5672 -e AMQ_USER=quarkus -e AMQ_PASSWORD=quarkus quay.io/artemiscloud/activemq-artemis-broker:0.1.4
+Wykorzystywana jest również baza postgres (należy ściągnąć odpowiedni obraz) i w terminalu wpisać:
+docker-compose up
+
+
 This project uses Quarkus, the Supersonic Subatomic Java Framework.
 
 If you want to learn more about Quarkus, please visit its website: https://quarkus.io/ .

@@ -17,7 +17,7 @@ public class MessageLogger {
     ChatRoom chatRoom;
 
     public void log(TransferMessage transferMessage){
-        if((ServerEventType.PUBLIC.equals(transferMessage.getType())//transferMessage.isPublish()
+        if((ServerEventType.PUBLIC.equals(transferMessage.getType())
                 || ChatClient.clientName.equals(transferMessage.getClientName()))
                 && chatRoom.getRoomNumber() == transferMessage.getRoomNr()) {
             log.info(transferMessage.getTextMsg());

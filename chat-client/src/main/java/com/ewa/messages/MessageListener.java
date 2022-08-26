@@ -25,7 +25,6 @@ public class MessageListener implements Runnable{
 
     private final ExecutorService scheduler = Executors.newSingleThreadExecutor();
 
-
     void onStart(@Observes StartupEvent ev){
         scheduler.submit(this);
     }

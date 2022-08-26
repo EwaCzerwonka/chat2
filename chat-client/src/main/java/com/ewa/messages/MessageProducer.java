@@ -30,16 +30,10 @@ public class MessageProducer implements Runnable {
 
     @Override
     public void run() {
-        read();
-    }
-
-    public void read() {
         String text;
         Scanner scanner = new Scanner(System.in);
         while ((text =  scanner.nextLine()) != null) {
             worker.sendMessage(text);
         }
     }
-
-
 }

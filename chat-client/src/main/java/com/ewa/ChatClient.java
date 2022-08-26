@@ -1,13 +1,7 @@
 package com.ewa;
 
-import com.ewa.messages.Worker;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.inject.Inject;
+import lombok.NoArgsConstructor;
 import javax.inject.Singleton;
 
 @Singleton

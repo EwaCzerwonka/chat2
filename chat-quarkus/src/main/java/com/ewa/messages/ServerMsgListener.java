@@ -5,7 +5,6 @@ import com.ewa.commons.CommonNames;
 import com.ewa.domain.TransferMessage;
 import io.quarkus.runtime.ShutdownEvent;
 import io.quarkus.runtime.StartupEvent;
-import lombok.extern.java.Log;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.event.Observes;

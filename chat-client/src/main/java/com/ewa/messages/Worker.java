@@ -30,16 +30,25 @@ public class Worker {
 
     private TransferMessage process(String msg) {
         TransferMessage transferMessage;
-        if (msg.endsWith(OptionTypes.QUIT.label)) {
-            transferMessage = exit(msg, OptionTypes.QUIT.label);
-        } else if (msg.contains(OptionTypes.JOIN.label)) {
-            transferMessage = joinRoom(msg, OptionTypes.JOIN.label);
-        } else if (msg.endsWith(OptionTypes.HELP.label)) {
-            transferMessage = new TransferMessage(ChatClient.clientName, OptionTypes.MENU.label, chatRoom.getRoomNumber(), ServerEventType.INTERNAL); //false);
-        } else if(msg.contains(OptionTypes.HISTORY.label)) {
-            transferMessage = readHistory();
+        OptionTypes option = OptionTypes.ifContains(msg);
+        if(option != null){
+            transferMessage = getMessage(msg, option);
         } else {
             transferMessage = new TransferMessage(ChatClient.clientName, msg, chatRoom.getRoomNumber(), ServerEventType.PUBLIC);// true);
+        }
+        return transferMessage;
+    }
+
+    private TransferMessage getMessage(String msg, OptionTypes option){
+        TransferMessage transferMessage;
+        switch (option) {
+            case QUIT -> transferMessage = exit(msg, OptionTypes.QUIT.label);
+            case JOIN -> transferMessage = joinRoom(msg, OptionTypes.JOIN.label);
+            case HELP -> transferMessage = new TransferMessage(ChatClient.clientName, OptionTypes.MENU.label,
+                    chatRoom.getRoomNumber(), ServerEventType.INTERNAL);
+            case HISTORY -> transferMessage = readHistory();
+            default -> transferMessage = new TransferMessage(ChatClient.clientName, msg,
+                    chatRoom.getRoomNumber(), ServerEventType.PUBLIC);
         }
         return transferMessage;
     }
@@ -49,7 +58,7 @@ public class Worker {
         if (roomNumber != 0) {
             String leaveText = TextParser.getFirstPart(text, separator) + " Exited from room: " + roomNumber;
             chatRoom.setRoomNumber(0);
-            return new TransferMessage(ChatClient.clientName, leaveText, roomNumber, ServerEventType.PUBLIC);// true);
+            return new TransferMessage(ChatClient.clientName, leaveText, roomNumber, ServerEventType.PUBLIC);
         } else {
             Quarkus.asyncExit();
         }
@@ -61,7 +70,7 @@ public class Worker {
         if (number != 0) {
             chatRoom.setRoomNumber(number);
             String msg = String.format("%s Joined room %s", ChatClient.clientName, number);
-            return new TransferMessage(ChatClient.clientName, msg, number, ServerEventType.PUBLIC);// true);
+            return new TransferMessage(ChatClient.clientName, msg, number, ServerEventType.PUBLIC);
         }
         return null;
     }

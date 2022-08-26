@@ -1,7 +1,5 @@
 package com.ewa.messages;
 
-
-
 import com.ewa.domain.TransferMessage;
 import lombok.RequiredArgsConstructor;
 

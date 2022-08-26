@@ -2,14 +2,12 @@ package com.ewa.persistence;
 
 import com.ewa.commons.LogTextParser;
 import com.ewa.domain.TransferMessage;
-import lombok.extern.java.Log;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 
-@Log
 @ApplicationScoped
 public class ChatRepository {
 

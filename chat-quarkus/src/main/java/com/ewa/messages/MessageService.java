@@ -19,15 +19,30 @@ public class MessageService {
     ChatRepository chatRepository;
 
     public void processTransferMessage(TransferMessage transferMessage){
-        if(ServerEventType.PUBLIC.equals(transferMessage.getType())) {
+        switch(transferMessage.getType()){
+            case PUBLIC -> chatRepository.createChatEntry(transferMessage);
+            case HISTORY_READ -> sendHistory(transferMessage);
+            }
+        }
+
+        private void sendHistory(TransferMessage transferMessage){
+            String msg = chatRepository.getUserHistory(transferMessage);
+            if (msg != null) {
+                var historyMsg = new TransferMessage(transferMessage.getClientName(), msg,
+                        transferMessage.getRoomNr(), ServerEventType.INTERNAL);
+                worker.sendMessage(historyMsg);
+            }
+        }
+        /*if(ServerEventType.PUBLIC.equals(transferMessage.getType())) {
             chatRepository.createChatEntry(transferMessage);
         } else if(ServerEventType.HISTORY_READ.equals(transferMessage.getType())){
             String msg = chatRepository.getUserHistory(transferMessage);
             if(msg != null) {
-                var historyMsg = new TransferMessage(transferMessage.getClientName(), msg, transferMessage.getRoomNr(), ServerEventType.INTERNAL);
+                var historyMsg = new TransferMessage(transferMessage.getClientName(), msg,
+                        transferMessage.getRoomNr(), ServerEventType.INTERNAL);
                 worker.sendMessage(historyMsg);
             }
         }
-    }
+    }*/
 
 }

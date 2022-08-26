@@ -2,7 +2,6 @@ package com.ewa.messages;
 
 import com.ewa.commons.CommonNames;
 import com.ewa.domain.TransferMessage;
-import lombok.extern.java.Log;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -11,11 +10,7 @@ import javax.jms.JMSContext;
 import javax.jms.JMSProducer;
 import javax.jms.Topic;
 
-/**
- * A bean producing random prices every 5 seconds and sending them to the prices JMS queue.
- */
 
-@Log
 @ApplicationScoped
 public class ServerMsgSender {
 
